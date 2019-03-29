@@ -1,0 +1,13 @@
+version: "1"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: choudhary/nodedocker
+    build: .
+    command: npm run start
+    ports:
+      - "3031:3031"
+    networks:
+      - webnet
+networks:
+  webnet:
