@@ -1,4 +1,4 @@
-import { searchBook } from '../api';
+import { searchBook, getBookInfo } from '../api';
 import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
@@ -6,7 +6,10 @@ import {
   FETCH_BOOKS_PENDING,
   FETCH_BOOKS_SUCCESS,
   FETCH_BOOKS_ERROR,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  FETCH_BOOK_DETAIL_PENDING,
+  FETCH_BOOK_DETAIL_SUCCESS,
+  FETCH_BOOK_DETAIL_ERROR
 } from './actionType';
 
 export const updateUserDetails = data => dispatch => {
@@ -34,7 +37,7 @@ export const searchBooks = (params, type) => dispatch => {
       dispatch({
         type: FETCH_BOOKS_SUCCESS,
         payload: {
-          data: data,
+          data: type === 'bname' ? data.docs : [data[params.bibkeys]],
           type: type
         }
       });
@@ -42,6 +45,29 @@ export const searchBooks = (params, type) => dispatch => {
     .catch(err => {
       dispatch({
         type: FETCH_BOOKS_ERROR,
+        payload: err
+      });
+    });
+};
+
+export const getBookDetail = (params, isbn) => dispatch => {
+  dispatch({
+    type: FETCH_BOOK_DETAIL_PENDING
+  });
+
+  getBookInfo(params)
+    .then(({ data }) => {
+      dispatch({
+        type: FETCH_BOOK_DETAIL_SUCCESS,
+        payload: {
+          data: data[params.bibkeys],
+          isbn: isbn
+        }
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: FETCH_BOOK_DETAIL_ERROR,
         payload: err
       });
     });

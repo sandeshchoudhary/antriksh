@@ -6,8 +6,8 @@ import { Route, Switch, Link } from 'react-router-dom';
 import axios from 'axios';
 import DetailView from './DetailView';
 import SearchPanel from './SearchPanel';
-import {history} from '../store';
-import {logoutUser} from '../reducers/action';
+import { history } from '../store';
+import { logoutUser } from '../reducers/action';
 
 class Library extends Component {
   constructor(props) {
@@ -23,12 +23,12 @@ class Library extends Component {
   componentWillReceiveProps(nextProps) {}
 
   logout = () => {
-    this.props.logoutUser()
-    history.push('/')
-  }
+    this.props.logoutUser();
+    history.push('/');
+  };
 
   render() {
-    const {userData} = this.props;
+    const { userData } = this.props;
     return (
       <Container fluid style={{ padding: '0px' }}>
         <Navbar bg="dark" variant="dark">
@@ -43,10 +43,16 @@ class Library extends Component {
             {' Antriksh '}
           </Navbar.Brand>
           {userData && (
-            <NavDropdown title={userData.profileObj.name} id="basic-nav-dropdown"
+            <div className="d-flex justify-content-end" style={{ flex: '1' }}>
+              <NavDropdown
+                title={userData.profileObj.name}
+                id="basic-nav-dropdown"
               >
-              <NavDropdown.Item onClick={() => this.logout()}>Logout</NavDropdown.Item>
-            </NavDropdown>
+                <NavDropdown.Item onClick={() => this.logout()}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </div>
           )}
         </Navbar>
         <Switch>

@@ -46,7 +46,7 @@ class SearchPanel extends Component {
   }
 
   render() {
-    const {booksList = [], booksLoading} = this.props;
+    const {booksList = [], booksLoading, searched} = this.props;
 
     return (
       <Container fluid>
@@ -77,15 +77,20 @@ class SearchPanel extends Component {
               </Button>
             )}
           <div>
-            {/* <input type="radio" name="searchOption" value="isbn" checked={this.state.searchOption === 'isbn'}
-              onClick={() => this.handleRadioInput('isbn')}/> ISBN */}
+            <input type="radio" name="searchOption" value="isbn" checked={this.state.searchOption === 'isbn'}
+              onChange={() => this.handleRadioInput('isbn')}/> ISBN
             <input type="radio" name="searchOption" value="bname" checked={this.state.searchOption === 'bname'}
               style={{marginLeft: '16px'}}
-              onClick={() => this.handleRadioInput('bname')} /> Book Name
+              onChange={() => this.handleRadioInput('bname')} /> Book Name
           </div>
         </div>
         {!booksLoading && booksList.length > 0 && (
-          <BooksList booksList={booksList} />
+          <BooksList booksList={booksList} type={this.state.searchOption} />
+        )}
+        {!booksLoading && searched && booksList.length === 0 && (
+          <div className="d-flex justify-content-center text-danger">
+            No Result Found
+          </div>
         )}
       </Container>
     );
@@ -94,7 +99,8 @@ class SearchPanel extends Component {
 
 const mapStateToProps = ({ moduleStore = {} }) => ({
   booksLoading: moduleStore.booksLoading,
-  booksList: moduleStore.booksList
+  booksList: moduleStore.booksList,
+  searched: moduleStore.searched
 });
 
 export default connect(mapStateToProps, {

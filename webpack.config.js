@@ -60,10 +60,6 @@ const plugins = [
   new webpack.HotModuleReplacementPlugin()
 ];
 
-// if (!isProd) {
-//   plugins.push(new webpack.HotModuleReplacementPlugin());
-// }
-
 if (isProd) {
   plugins.push(
     new UglifyJsPlugin({

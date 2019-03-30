@@ -30,3 +30,10 @@ export const searchBook = (params, type) => {
   url = `${url}?${queryParams}`;
   return axios.get(url);
 };
+
+export const getBookInfo = params => {
+  let url = 'https://openlibrary.org/api/books';
+  const queryParams = querProp.stringifyQueryParams(params);
+  url = `${url}?${queryParams}`;
+  return axios.get(url);
+};
