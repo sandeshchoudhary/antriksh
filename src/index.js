@@ -5,8 +5,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch, Link } from 'react-router-dom';
 import { store, history } from './store';
 import App from './app';
-// import DetailView from './DetailView';
-// import Library from './Library';
 import Login from './Login';
 import Library from './Library';
 
