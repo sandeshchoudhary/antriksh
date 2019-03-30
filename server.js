@@ -33,7 +33,7 @@ app.use('/dist', express.static(__dirname + '/dist/'));
 app.use('/public', express.static(__dirname + '/public'));
 
 // viewed at http://localhost:3031
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 

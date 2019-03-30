@@ -5,7 +5,7 @@ import { updateUserDetails } from '../reducers/action';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { GoogleLogin } from 'react-google-login';
-import {history} from '../store'
+import { history } from '../store';
 
 class Login extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
-      history.push('/library')
+      history.push('/library');
     }
   }
 
@@ -23,7 +23,7 @@ class Login extends Component {
    */
   responseGoogle = response => {
     this.props.updateUserDetails(response);
-    history.push('/library')
+    history.push('/library');
   };
 
   render() {
@@ -45,7 +45,6 @@ class Login extends Component {
                   <Button onClick={renderProps.onClick} variant="primary">
                     Login with Google
                   </Button>
-                  
                 )}
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}

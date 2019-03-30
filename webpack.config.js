@@ -40,23 +40,29 @@ function getBabelConfig() {
 
 const entry = isProd
   ? ['babel-polyfill', './index.js']
-  : ['webpack/hot/poll?1000', 'babel-polyfill', './index.js'];
+  : [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000',
+      'babel-polyfill',
+      './index.js'
+    ];
 
 const output = {
   filename: 'bundle.js',
-  path: __dirname + '/dist'
+  path: __dirname + '/dist',
+  publicPath: '/'
 };
 
 const plugins = [
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
-  })
+  }),
+  new webpack.HotModuleReplacementPlugin()
 ];
 
-if (!isProd) {
-  plugins.push(new webpack.HotModuleReplacementPlugin());
-}
+// if (!isProd) {
+//   plugins.push(new webpack.HotModuleReplacementPlugin());
+// }
 
 if (isProd) {
   plugins.push(
@@ -82,6 +88,9 @@ module.exports = {
       {
         test: /\.js$/,
         use: [
+          {
+            loader: 'react-hot-loader/webpack'
+          },
           {
             loader: 'babel-loader',
             query: getBabelConfig()

@@ -12,17 +12,13 @@ class Library extends Component {
     super(props);
   }
 
-  componentDidMount() {
+  componentDidMount() {}
 
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-  }
+  componentWillReceiveProps(nextProps) {}
 
   render() {
     return (
-      <Container fluid style={{padding: '0px'}}>
+      <Container fluid style={{ padding: '0px' }}>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="/">
             <img
@@ -40,18 +36,13 @@ class Library extends Component {
             path="/library/overview"
             render={props => <DetailView {...props} />}
           />
-          <Route
-            path="/"
-            render={props => <SearchPanel {...props} />}
-          />
+          <Route path="/" render={props => <SearchPanel {...props} />} />
         </Switch>
       </Container>
     );
   }
 }
 
-const mapStateToProps = ({ moduleStore = {} }) => ({
-});
+const mapStateToProps = ({ moduleStore = {} }) => ({});
 
-export default connect(mapStateToProps, {
-})(Library);
+export default connect(mapStateToProps, {})(Library);

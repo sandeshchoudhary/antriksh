@@ -37,3 +37,7 @@ export default class Root extends Component {
 }
 
 ReactDOM.render(<Root />, document.getElementById('app'));
+
+if (module.hot) {
+  module.hot.accept();
+}
