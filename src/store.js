@@ -11,7 +11,7 @@ export const history = createHistory({ basename: '' });
 
 const preloadedState = {
   moduleStore: {
-    userData: window.localStorage.getItem('userData'),
+    userData: JSON.parse(window.localStorage.getItem('userData')),
     isLoggedIn: window.localStorage.getItem('userData') ? true : false
   }
 };

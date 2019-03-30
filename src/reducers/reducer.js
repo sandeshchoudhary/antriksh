@@ -3,7 +3,8 @@ import {
   LOGIN_SUCCESS,
   FETCH_BOOKS_PENDING,
   FETCH_BOOKS_SUCCESS,
-  FETCH_BOOKS_ERROR
+  FETCH_BOOKS_ERROR,
+  LOGOUT_SUCCESS
 } from './actionType';
 
 const INITIAL_STATE = {};
@@ -24,6 +25,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         userData: payload,
         isLoggedIn: true
+      });
+
+    case LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        userData: null,
+        isLoggedIn: false
       });
 
     case FETCH_BOOKS_PENDING:

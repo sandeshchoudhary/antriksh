@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Container, Row, Navbar, Table } from 'react-bootstrap';
+import { Button, Container, Row, Navbar, Table, ModalTitle } from 'react-bootstrap';
 import { Route, Switch, Link } from 'react-router-dom';
 import {history} from '../../store';
 
@@ -18,9 +18,12 @@ class BooksList extends Component {
   renderTableBody = books => {
     return books.map((item, index) => {
       return (
-        <tr key={index}>
+        <tr key={index} style={{cursor: 'pointer'}}>
           <td>{index + 1}</td>
-          <td>{item.title}</td>
+          <td onClick={() => history.push(`/library/${item.isbn[0]}`)}
+            style={{color: '#0070DD', fontWeight: '500'}}>
+            {item.title}
+          </td>
           <td>{item.author_name && item.author_name[0]}</td>
           <td>{item.publisher && item.publisher[0]}</td>
         </tr>

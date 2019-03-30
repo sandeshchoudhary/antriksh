@@ -25,6 +25,12 @@ class SearchPanel extends Component {
     this.setState({query: event.target.value})
   }
 
+  handleKeyPress = event => {
+    if (event.key === 'Enter' && this.state.query) {
+      this.handleSearch();
+    }
+  }
+
   handleSearch = () => {
     const {searchBooks} = this.props;
     const {query, searchOption} = this.state;
@@ -47,17 +53,19 @@ class SearchPanel extends Component {
         <div style={{padding: '32px', textAlign: 'center'}}>
           <h4>Explore Books Here</h4>
           <div>
-            <input type="text" onChange={ev => this.handleTextInput(ev)} style={{width: '200px', height: '38px'}}
+            <input type="text"
+              onKeyPress={ev => this.handleKeyPress(ev)}
+              onChange={ev => this.handleTextInput(ev)} style={{width: '400px', height: '38px', marginBottom: '16px'}}
               placeholder={'Search...'} />
-            {!booksLoading && (
+          </div>
+          {!booksLoading && (
               <Button onClick={() => this.handleSearch()} variant="primary"
-                style={{marginLeft: '16px'}}
                 disabled={!this.state.query}>
                 Search
               </Button>
             )}
             {booksLoading && (
-              <Button variant="primary" disabled style={{marginLeft: '16px'}}>
+              <Button variant="primary" disabled>
                 <Spinner
                   as="span"
                   animation="grow"
@@ -68,7 +76,6 @@ class SearchPanel extends Component {
                 Searching...
               </Button>
             )}
-          </div>
           <div>
             {/* <input type="radio" name="searchOption" value="isbn" checked={this.state.searchOption === 'isbn'}
               onClick={() => this.handleRadioInput('isbn')}/> ISBN */}

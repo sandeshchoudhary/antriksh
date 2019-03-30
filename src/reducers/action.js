@@ -5,14 +5,22 @@ import {
   LOGIN_ERROR,
   FETCH_BOOKS_PENDING,
   FETCH_BOOKS_SUCCESS,
-  FETCH_BOOKS_ERROR
+  FETCH_BOOKS_ERROR,
+  LOGOUT_SUCCESS
 } from './actionType';
 
 export const updateUserDetails = data => dispatch => {
-  window.localStorage.setItem('userData', data);
+  window.localStorage.setItem('userData', JSON.stringify(data));
   dispatch({
     type: LOGIN_SUCCESS,
     payload: data
+  });
+};
+
+export const logoutUser = () => dispatch => {
+  window.localStorage.clear();
+  dispatch({
+    type: LOGOUT_SUCCESS
   });
 };
 
