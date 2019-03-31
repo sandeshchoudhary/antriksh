@@ -4,8 +4,34 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
 import { store, history } from './store';
-import Login from './Login';
-import Library from './Library';
+import Loadable from 'react-loadable';
+import { Container, Spinner } from 'react-bootstrap';
+
+const Loading = () => {
+  return (
+    <Container
+      fluid
+      style={{ height: '75vh' }}
+      className="bg-light d-flex justify-content-center align-items-center"
+    >
+      <Spinner
+        animation="border"
+        role="status"
+        style={{ height: '48px', width: '48px' }}
+      />
+    </Container>
+  );
+};
+
+const Login = Loadable({
+  loader: () => import('./Login'),
+  loading: Loading
+});
+
+const Library = Loadable({
+  loader: () => import('./Library'),
+  loading: Loading
+});
 
 export default class Root extends Component {
   constructor(props) {

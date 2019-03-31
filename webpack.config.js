@@ -48,7 +48,9 @@ const entry = isProd
 const output = {
   filename: 'bundle.js',
   path: __dirname + '/dist',
-  publicPath: '/'
+  publicPath: '/dist/',
+  library: `[name]`,
+  chunkFilename: 'chunk.[name].[chunkhash].js'
 };
 
 const plugins = [
