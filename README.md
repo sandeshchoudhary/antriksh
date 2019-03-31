@@ -1,14 +1,36 @@
 # Antrisk
 Open Library
  
-- Build docker image
+### Dependencies
+- Node: v8.12.0
+
+
+### Setup Project 
 ```sh
 $ git clone https://github.com/sandeshchoudhary/antriksh.git
 $ cd antriksh
-$ docker-compose build --force
+$ npm i
 ```
 
-- Run docker image
+### Run production build
+Runs application on PORT 3031 by default.
 ```sh
-$ docker-compose -up
+$ npm run build && npm run start
+```
+
+### Run in development mode
+```sh
+$ npm run dev
+```
+
+### Check errors
+- Suite: Eslint
+```sh
+$ npm run lint
+```
+
+### Run test
+- Test suite: Jest
+```sh
+$ npm run test
 ```
