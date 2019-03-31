@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const isProd = process.env.NODE_SHELL_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 const mode = isProd ? 'production' : 'development';
 
 const devtool = isProd ? 'source-map' : 'cheap-module-eval-source-map';

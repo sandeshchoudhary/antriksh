@@ -12,10 +12,23 @@ import {
   FETCH_BOOK_DETAIL_ERROR
 } from './actionType';
 
+export const loginProcess = () => dispatch => {
+  dispatch({
+    type: LOGIN_PENDING
+  });
+};
+
 export const updateUserDetails = data => dispatch => {
   window.localStorage.setItem('userData', JSON.stringify(data));
   dispatch({
     type: LOGIN_SUCCESS,
+    payload: data
+  });
+};
+
+export const updateLoginError = data => dispatch => {
+  dispatch({
+    type: LOGIN_ERROR,
     payload: data
   });
 };

@@ -7,7 +7,8 @@ import {
   LOGOUT_SUCCESS,
   FETCH_BOOK_DETAIL_PENDING,
   FETCH_BOOK_DETAIL_SUCCESS,
-  FETCH_BOOK_DETAIL_ERROR
+  FETCH_BOOK_DETAIL_ERROR,
+  LOGIN_ERROR
 } from './actionType';
 
 const INITIAL_STATE = {
@@ -31,7 +32,21 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         ...{
           userData: payload,
-          isLoggedIn: true
+          isLoggedIn: true,
+          loginError: false,
+          loginErrorMessage: '',
+          loging: false
+        }
+      };
+
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        ...{
+          isLoggedIn: false,
+          loginError: true,
+          loginErrorMessage: 'Not able to login. Please try again.',
+          loging: false
         }
       };
 

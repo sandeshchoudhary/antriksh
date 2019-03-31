@@ -5,8 +5,17 @@ import createHistory from 'history/createBrowserHistory';
 import { rootReducer } from './reducers';
 
 const middleware = [thunk];
-middleware.push(createLogger());
 
+/**
+ * Push logger in development mode
+ */
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger());
+}
+
+/**
+ * App history
+ */
 export const history = createHistory({ basename: '' });
 
 const preloadedState = {
@@ -16,6 +25,9 @@ const preloadedState = {
   }
 };
 
+/**
+ * Create store with preloaded state
+ */
 export const store = createStore(
   rootReducer,
   preloadedState,
