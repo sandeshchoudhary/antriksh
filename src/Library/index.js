@@ -1,11 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, NavDropdown, Spinner } from 'react-bootstrap';
 import { Route, Switch } from 'react-router-dom';
-import DetailView from './DetailView';
-import SearchPanel from './SearchPanel';
 import { history } from '../store';
 import { logoutUser } from '../reducers/action';
+import Loadable from 'react-loadable';
+
+const Loading = () => {
+  return (
+    <Container
+      fluid
+      style={{ height: '75vh' }}
+      className="bg-light d-flex justify-content-center align-items-center"
+    >
+      <Spinner
+        animation="border"
+        role="status"
+        style={{ height: '48px', width: '48px' }}
+      />
+    </Container>
+  );
+};
+
+const SearchPanel = Loadable({
+  loader: () => import('./SearchPanel'),
+  loading: Loading
+});
+
+const DetailView = Loadable({
+  loader: () => import('./DetailView'),
+  loading: Loading
+});
 
 class Library extends Component {
   constructor(props) {
