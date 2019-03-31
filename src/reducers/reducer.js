@@ -10,10 +10,7 @@ import {
   FETCH_BOOK_DETAIL_ERROR,
   LOGIN_ERROR
 } from './actionType';
-
-const INITIAL_STATE = {
-  bookDetail: {}
-};
+import { INITIAL_STATE } from './initialState';
 
 const reducer = (state = INITIAL_STATE, action) => {
   const { payload, type } = action;

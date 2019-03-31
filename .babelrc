@@ -1,6 +1,28 @@
 {
   "presets": [
-    "es2015",
-    "react"
+    "env",
+    "babel-preset-es2015",
+    "react",
+    [
+      "babel-preset-env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions"]
+        }
+      }
+    ]
+  ],
+  "ignore": [],
+  "plugins": [
+    [
+      "transform-strict-mode",
+      {
+        "strict": false
+      }
+    ],
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "syntax-dynamic-import",
+    "transform-function-bind"
   ]
 }

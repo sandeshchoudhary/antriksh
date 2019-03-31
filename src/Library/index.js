@@ -39,6 +39,7 @@ class Library extends Component {
 
   componentDidMount() {
     // Redirect to login page if user is not logged in
+    console.log('in monubr');
     if (!this.props.isLoggedIn) {
       history.push('/');
     }
@@ -69,7 +70,10 @@ class Library extends Component {
           {' Antriksh '}
         </Navbar.Brand>
         <div className="d-flex justify-content-end" style={{ flex: '1' }}>
-          <NavDropdown title={userData.profileObj.name} id="basic-nav-dropdown">
+          <NavDropdown
+            title={userData && userData.profileObj.name}
+            id="basic-nav-dropdown"
+          >
             <NavDropdown.Item onClick={() => this.logout()}>
               Logout
             </NavDropdown.Item>
@@ -80,7 +84,7 @@ class Library extends Component {
   };
 
   render() {
-    const { userData } = this.props;
+    const { userData = {} } = this.props;
     return (
       <Container fluid style={{ padding: '0px' }}>
         {this.renderNav(userData)}
