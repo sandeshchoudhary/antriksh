@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import {  } from '../reducers/action';
-import { Button, Container, Row, Navbar, NavDropdown } from 'react-bootstrap';
-import { Route, Switch, Link } from 'react-router-dom';
-import axios from 'axios';
+import { Container, Navbar, NavDropdown } from 'react-bootstrap';
+import { Route, Switch } from 'react-router-dom';
 import DetailView from './DetailView';
 import SearchPanel from './SearchPanel';
 import { history } from '../store';
@@ -15,46 +13,52 @@ class Library extends Component {
   }
 
   componentDidMount() {
+    // Redirect to login page if user is not logged in
     if (!this.props.isLoggedIn) {
       history.push('/');
     }
   }
 
-  componentWillReceiveProps(nextProps) {}
-
+  /**
+   * Handle logout
+   */
   logout = () => {
     this.props.logoutUser();
     history.push('/');
+  };
+
+  /**
+   * Render nav bar
+   */
+  renderNav = (userData = {}) => {
+    return (
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="/">
+          <img
+            alt=""
+            src="/logo.svg"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />
+          {' Antriksh '}
+        </Navbar.Brand>
+        <div className="d-flex justify-content-end" style={{ flex: '1' }}>
+          <NavDropdown title={userData.profileObj.name} id="basic-nav-dropdown">
+            <NavDropdown.Item onClick={() => this.logout()}>
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown>
+        </div>
+      </Navbar>
+    );
   };
 
   render() {
     const { userData } = this.props;
     return (
       <Container fluid style={{ padding: '0px' }}>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">
-            <img
-              alt=""
-              src="/logo.svg"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />
-            {' Antriksh '}
-          </Navbar.Brand>
-          {userData && (
-            <div className="d-flex justify-content-end" style={{ flex: '1' }}>
-              <NavDropdown
-                title={userData.profileObj.name}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item onClick={() => this.logout()}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </div>
-          )}
-        </Navbar>
+        {this.renderNav(userData)}
         <Switch>
           <Route
             path="/library/:id"

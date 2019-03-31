@@ -45,7 +45,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...{
           isLoggedIn: false,
           loginError: true,
-          loginErrorMessage: 'Not able to login. Please try again.',
+          loginErrorMessage: payload,
           loging: false
         }
       };
@@ -67,28 +67,44 @@ const reducer = (state = INITIAL_STATE, action) => {
     case FETCH_BOOKS_SUCCESS:
       return {
         ...state,
-        ...{ booksLoading: false, booksList: payload.data, searched: true }
+        ...{
+          booksLoading: false,
+          booksList: payload.data,
+          searched: true,
+          booksError: false,
+          booksErrorMessage: ''
+        }
       };
 
     case FETCH_BOOKS_ERROR:
-      return { ...state, ...{ booksLoading: false, booksError: true } };
+      return {
+        ...state,
+        ...{ booksLoading: false, booksError: true, booksErrorMessage: payload }
+      };
 
     case FETCH_BOOK_DETAIL_PENDING:
       return { ...state, ...{ bookDetailLoading: true } };
 
     case FETCH_BOOK_DETAIL_SUCCESS:
-      let newState = {
+      return {
         ...state,
         ...{
           bookDetailLoading: false,
           bookDetailError: false,
-          bookDetail: payload.data
+          bookDetail: payload.data,
+          bookDetailErrorMessage: ''
         }
       };
-      return { ...state, ...newState };
 
     case FETCH_BOOK_DETAIL_ERROR:
-      return { ...state, ...{ bookDetailError: true } };
+      return {
+        ...state,
+        ...{
+          bookDetailError: true,
+          bookDetailErrorMessage: payload,
+          bookDetailLoading: false
+        }
+      };
 
     default:
       return state;

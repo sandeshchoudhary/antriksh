@@ -12,12 +12,19 @@ import {
   FETCH_BOOK_DETAIL_ERROR
 } from './actionType';
 
+/**
+ * Initiate login process
+ */
 export const loginProcess = () => dispatch => {
   dispatch({
     type: LOGIN_PENDING
   });
 };
 
+/**
+ * Save user data
+ * @param {Object} data user data
+ */
 export const updateUserDetails = data => dispatch => {
   window.localStorage.setItem('userData', JSON.stringify(data));
   dispatch({
@@ -26,13 +33,21 @@ export const updateUserDetails = data => dispatch => {
   });
 };
 
-export const updateLoginError = data => dispatch => {
+/**
+ * Save login error
+ * @param {Object} err error
+ */
+export const updateLoginError = err => dispatch => {
+  console.log(err);
   dispatch({
     type: LOGIN_ERROR,
-    payload: data
+    payload: 'Not able to login. Please try again'
   });
 };
 
+/**
+ * Logout user
+ */
 export const logoutUser = () => dispatch => {
   window.localStorage.clear();
   dispatch({
@@ -40,6 +55,11 @@ export const logoutUser = () => dispatch => {
   });
 };
 
+/**
+ * Search books
+ * @param {Object} params search filter params
+ * @param {String} type search type
+ */
 export const searchBooks = (params, type) => dispatch => {
   dispatch({
     type: FETCH_BOOKS_PENDING
@@ -56,13 +76,19 @@ export const searchBooks = (params, type) => dispatch => {
       });
     })
     .catch(err => {
+      console.log(err);
       dispatch({
         type: FETCH_BOOKS_ERROR,
-        payload: err
+        payload: 'Not able to search books'
       });
     });
 };
 
+/**
+ * Get book detail
+ * @param {Object} params search filter params
+ * @param {String} isbn book isbn code
+ */
 export const getBookDetail = (params, isbn) => dispatch => {
   dispatch({
     type: FETCH_BOOK_DETAIL_PENDING
@@ -79,9 +105,10 @@ export const getBookDetail = (params, isbn) => dispatch => {
       });
     })
     .catch(err => {
+      console.log(err);
       dispatch({
         type: FETCH_BOOK_DETAIL_ERROR,
-        payload: err
+        payload: 'Not able to fetch book detail'
       });
     });
 };

@@ -16,7 +16,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // Redirect to login page if user is not logged in
+    // Redirect to search page if user is logged in
     if (this.props.isLoggedIn) {
       history.push('/library');
     }
@@ -69,9 +69,9 @@ class Login extends Component {
                 onSuccess={this.responseGoogleSuccess}
                 onFailure={this.responseGoogleError}
               />
-              {/* {loginError && ( */}
-              <p className="text-danger m-4">{loginErrorMessage}</p>
-              {/* )} */}
+              {loginError && (
+                <p className="text-danger m-4">{loginErrorMessage}</p>
+              )}
             </div>
           </Col>
         </Row>

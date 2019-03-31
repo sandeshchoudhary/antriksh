@@ -7,9 +7,6 @@ const webpackConfig = require('./webpack.config.js');
 const webpack = require('webpack');
 const port = process.env.PORT || 3031;
 const compiler = webpack(webpackConfig);
-const fs = require('fs');
-const storeDir = __dirname + '/public/';
-var encoding = 'utf8';
 
 app.use(
   webpackDevMiddleware(compiler, {

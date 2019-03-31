@@ -17,15 +17,8 @@ export default class Root extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route
-              path="/library"
-              render={props => <Library {...props} />}
-            />
-            <Route
-              exact
-              path="/"
-              render={props => <Login {...props} />}
-            />
+            <Route path="/library" render={props => <Library {...props} />} />
+            <Route path="/" render={props => <Login {...props} />} />
           </Switch>
         </ConnectedRouter>
       </Provider>
