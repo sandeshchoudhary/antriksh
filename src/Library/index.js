@@ -39,7 +39,6 @@ class Library extends Component {
 
   componentDidMount() {
     // Redirect to login page if user is not logged in
-    console.log('in monubr');
     if (!this.props.isLoggedIn) {
       history.push('/');
     }
@@ -59,16 +58,7 @@ class Library extends Component {
   renderNav = (userData = {}) => {
     return (
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/">
-          <img
-            alt=""
-            src="/logo.svg"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />
-          {' Antriksh '}
-        </Navbar.Brand>
+        <Navbar.Brand href="/">{' Antriksh '}</Navbar.Brand>
         <div className="d-flex justify-content-end" style={{ flex: '1' }}>
           <NavDropdown
             title={userData && userData.profileObj.name}

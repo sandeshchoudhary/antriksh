@@ -131,7 +131,11 @@ class SearchPanel extends Component {
         {this.renderSearchPanel()}
         {!booksLoading &&
           booksList.length > 0 && (
-            <BooksList booksList={booksList} type={this.state.searchOption} />
+            <BooksList
+              booksList={booksList}
+              type={this.state.searchOption}
+              query={this.state.query}
+            />
           )}
         {!booksLoading &&
           searched &&

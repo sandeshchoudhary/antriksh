@@ -7,19 +7,29 @@ class BooksList extends Component {
     super(props);
   }
 
+  handleOnClick = (item, type, query) => {
+    if (type === 'isbn') {
+      history.push(`/library/${query}`);
+    } else {
+      item.isbn && history.push(`/library/${item.isbn[0]}`);
+    }
+  };
+
   /**
    * Render table body
    */
-  renderTableBody = (books, type) => {
+  renderTableBody = (books, type, query) => {
     return books.map((item, index) => {
       return (
         <tr key={index} style={{ cursor: 'pointer' }}>
           <td>{index + 1}</td>
           <td
-            onClick={() =>
-              item.isbn && history.push(`/library/${item.isbn[0]}`)
-            }
-            style={{ color: item.isbn ? '#0070DD' : 'gray', fontWeight: '500' }}
+            onClick={() => this.handleOnClick(item, type, query)}
+            style={{
+              color:
+                type === 'isbn' ? '#0070DD' : item.isbn ? '#0070DD' : 'gray',
+              fontWeight: '500'
+            }}
           >
             {item.title}
           </td>
@@ -37,7 +47,7 @@ class BooksList extends Component {
   };
 
   render() {
-    const { booksList = [], type } = this.props;
+    const { booksList = [], type, query } = this.props;
 
     return (
       <Container fluid style={{ maxHeight: '75vh', overflow: 'auto' }}>
@@ -50,7 +60,7 @@ class BooksList extends Component {
               <th>Publisher</th>
             </tr>
           </thead>
-          <tbody>{this.renderTableBody(booksList, type)}</tbody>
+          <tbody>{this.renderTableBody(booksList, type, query)}</tbody>
         </Table>
       </Container>
     );
